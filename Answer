@@ -1,0 +1,23 @@
+def is_authentic_skewer(s):
+    if s == [] or len(s) <= 2:
+        return False
+    vowels = ["A","E","I","O","U"]
+    if s[0] in vowels or s[-1] in vowels:
+        return False
+    spacing = 0
+    for i in range(len(s) - 1):
+        if s[i + 1] == "-":
+            spacing += 1
+        else:
+            break
+    if spacing == 0:
+        return False
+    s = s.split("-" * spacing)
+    if len(s[-1]) != 1:
+        return False
+    for i in range(len(s) - 1):
+        if len(s[i]) != 1 or s[i] == "-":
+            return False
+        if s[i] in vowels and s[i + 1] in vowels or s[i] not in vowels and s[i + 1] not in vowels:
+            return False
+    return True
